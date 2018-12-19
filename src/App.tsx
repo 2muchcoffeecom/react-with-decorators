@@ -2,8 +2,21 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+function classDecorator<T extends {new(...args:any[]):{}}>(constructor:T) {
+  return class extends constructor {
+    newProperty: string = "new property";
+    hello: string = "override";
+  }
+}
+
+@classDecorator
 class App extends Component {
+  property: string = "property";
+  hello: string = "hello";
+
   render() {
+    console.log(this.hello); // override
+
     return (
       <div className="App">
         <header className="App-header">
